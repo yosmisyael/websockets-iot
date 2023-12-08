@@ -1,11 +1,11 @@
-const autoBtn = document.getElementById("set-auto");
-const manualBtn = document.getElementById("set-manual");
-const serverStat = document.getElementById("server-status");
-const iotStat = document.getElementById("iot-status");
-const systemInfo = document.getElementById("system-info");
-const pumpInfo = document.getElementById("pump-info");
-const pumpOn = document.getElementById("pump-on");
-const pumpOff = document.getElementById("pump-off");
+const SERVER_NAME = "localhost";
+const autoButton = document.getElementById("auto-button");
+const manualButton = document.getElementById("manual-button");
+const serverConnState = document.getElementById("server-conn-status");
+const iotConnState = document.getElementById("iot-conn-status");
+const iotModeDisplay = document.getElementById("iot-mode-state");
+const pumpStateDisplay = document.getElementById("pump-state");
+const pumpSwitch = document.getElementsByClassName("pump-switch");
 const chart1 = document.getElementById("chart1");
 const chart2 = document.getElementById("chart2");
 const chart3 = document.getElementById("chart3");
@@ -13,54 +13,51 @@ const chart4 = document.getElementById("chart4");
 const chart5 = document.getElementById("chart5");
 const chart6 = document.getElementById("chart6");
 let lastHeartbeat = 0;
-const htmlOnConnectedServer = `
-                              <span class="online">
-                                  <span class="material-symbols-outlined">leak_add </span>
-                                  connected to server
-                              </span>
-                              
-                              `;
-const htmlOnDisconnectServer = `
-                                <span class="offline">
-                                    <span class="material-symbols-outlined">signal_disconnected </span>
-                                    disconnected from server
-                                </span>
-                              `;
-const onlineDevice = `
+
+const connectedToServerElement = `
   <span class="online">
-  <span class="material-symbols-outlined">stream</span>  
-  device is online
+    <span class="material-symbols-outlined">leak_add </span>
+    connected to server
   </span>
-  `;
-const offlineDevice = `
+`;
+
+const disconnectedToServerElement = `
+  <span class="offline">
+      <span class="material-symbols-outlined">signal_disconnected </span>
+      disconnected from server
+  </span>
+`;
+
+const onlineDeviceElement = `
+  <span class="online">
+    <span class="material-symbols-outlined">stream</span>  
+    device is online
+  </span>
+`;
+
+const offlineDeviceElement = `
   <span class="offline">
     <span class="material-symbols-outlined">stream</span>  
     device is offline
   </span>
 `;
 
-autoBtn.addEventListener("click", () => {
-  fetch("http://localhost/auto", {
+autoButton.addEventListener("click", () => {
+  fetch(`http://${SERVER_NAME}/auto`, {
     method: "GET",
     mode: "no-cors",
   });
 });
 
-manualBtn.addEventListener("click", () => {
-  fetch("http://localhost/manual", {
+manualButton.addEventListener("click", () => {
+  fetch(`http://${SERVER_NAME}/manual`, {
     method: "GET",
     mode: "no-cors",
   });
 });
 
-pumpOn.addEventListener("click", () => {
-  fetch("http://localhost/on", {
-    method: "GET",
-    mode: "no-cors",
-  });
-});
-pumpOff.addEventListener("click", () => {
-  fetch("http://localhost/off", {
+pumpSwitch.addEventListener("change", () => {
+  fetch(`http://${SERVER_NAME}/off`, {
     method: "GET",
     mode: "no-cors",
   });
@@ -70,31 +67,31 @@ const singleton = { wss: null };
 
 function getWebSocketConnection() {
   if (!singleton.wss || singleton.wss.readyState === WebSocket.CLOSED) {
-    singleton.wss = new WebSocket("ws://localhost");
+    singleton.wss = new WebSocket(`ws://${SERVER_NAME}/auto`);
     singleton.wss.onopen = () => {
-      serverStat.innerHTML = htmlOnConnectedServer;
+      serverConnState.innerHTML = connectedToServerElement;
     };
     singleton.wss.onclose = () => {
-      serverStat.innerHTML = htmlOnDisconnectServer;
+      serverConnState.innerHTML = disconnectedToServerElement;
       setInterval(getWebSocketConnection, 3000);
     };
     singleton.wss.onmessage = ({ data }) => {
       if (data === "online") {
-        iotStat.innerHTML = onlineDevice;
+        iotConnState.innerHTML = onlineDeviceElement;
         lastHeartbeat = Date.now();
       }
       switch (data) {
         case "auto":
-          systemInfo.innerHTML = "AUTO";
+          iotModeDisplay.innerHTML = "AUTO";
           break;
         case "manual":
-          systemInfo.innerHTML = "MANUAL";
+          iotModeDisplay.innerHTML = "MANUAL";
           break;
         case "pumpOn":
-          pumpInfo.innerHTML = "ON";
+          pumpStateDisplay.innerHTML = "ON";
           break;
         case "pumpOff":
-          pumpInfo.innerHTML = "OFF";
+          pumpStateDisplay.innerHTML = "OFF";
           break;
       }
     };
@@ -104,7 +101,7 @@ function getWebSocketConnection() {
 setInterval(() => {
   const currentTime = Date.now();
   if (currentTime - lastHeartbeat > 3000) {
-    iotStat.innerHTML = offlineDevice;
+    iotConnState.innerHTML = offlineDeviceElement;
   }
 }, 500);
 
