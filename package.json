@@ -1,0 +1,19 @@
+{
+  "name": "nodejs-websocket-iot",
+  "version": "1.0.0",
+  "description": "minimalist websocket server used to communicate with iot and frontend app to display realtime data",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server/server.js"
+  },
+  "keywords": [],
+  "author": "Misyael Yosevian Wiarda",
+  "license": "ISC",
+  "dependencies": {
+    "websocket": "^1.0.34",
+    "ws": "^8.14.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

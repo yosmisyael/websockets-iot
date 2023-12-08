@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Socket</title>
+</head>
+<body>
+    <label for="message">Type message here:</label>
+    <input type="text" name="message" id="message">
+    <button id="send-message" style="border-radius: 1rem; background-color: yellow; padding: .2rem .4rem;">send</button>
+    <button id="disconnect-button" style="border-radius: 1rem; background-color: red; padding: .2rem .4rem;">disconnect</button>
+    <button id="reconnect-button" style="border-radius: 1rem; background-color: green; padding: .2rem .4rem;">connect</button>
+    <br>
+    <h3>Messages from server:</h3>
+    <div id="messages-container" style="display: flex; flex-direction: column;"></div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/websocket@1.0.34/lib/browser.min.js"></script>
+    <script src="client.js"></script>
+</body>
+</html>

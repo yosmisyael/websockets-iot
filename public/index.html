@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Web Socket Communication</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /><link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <span id="server-status">fetching data</span>
+        |
+        <span id="iot-status" class="offline">fetching data</span>
+    </header>
+    
+    <!-- charts -->
+    <section class="sensor-chart-wrapper">
+        <!-- sensor 1-->
+        <div class="container">
+            <div id="chart1"></div>
+            <span style="padding: 1.8rem 0;" class="title-icon"><span class="material-symbols-outlined icon">water_drop</span>Soil Moisture 1</span>
+        </div>
+        <!-- sensor 2 -->
+        <div class="container">
+            <div id="chart2"></div>
+            <span style="padding: 1.8rem 0;" class="title-icon"><span class="material-symbols-outlined icon">water_drop</span>Soil Moisture 2</span>
+        </div>
+        <!-- sensor 3 -->
+        <div class="container">
+            <div id="chart3"></div>
+            <span style="padding: 1.8rem 0;" class="title-icon"><span class="material-symbols-outlined icon">water_drop</span>Soil Moisture 3</span>
+        </div>
+        <!-- sensor 4 -->
+        <div class="container">
+            <div id="chart4"></div>
+            <span style="padding: 1.8rem 0;" class="title-icon"><span class="material-symbols-outlined icon">water_drop</span>Soil Moisture 4</span>
+        </div>
+        <!-- sensor 5 -->
+        <div class="container">
+            <div id="chart5"></div>
+            <span style="padding: 1.8rem 0;" class="title-icon"><span class="material-symbols-outlined icon">water_drop</span>Soil Moisture 5</span>
+        </div>
+        <!-- sensor 6 -->
+        <div class="container">
+            <div id="chart6"></div>
+            <span style="padding: 1.8rem 0;" class="title-icon"><span class="material-symbols-outlined icon">water_drop</span>Soil Moisture 6</span>
+        </div>
+    </section>
+    
+    <!-- controls -->
+    <section class="control-wrapper">
+        <!-- mode -->
+        <div class="container">
+            <h4 style="margin-top: 1rem;" class="title-icon"><span class="material-symbols-outlined icon">switch_access</span>MODE</h3>
+            <h2 id="system-info" style="font-weight: bold; margin: .2rem;">AUTO</h2>
+            <div class="button-container">
+                <button id="set-auto" class="btn-1">Auto</button>
+                <button id="set-manual" class="btn-2">Manual</button>
+            </div>
+        </div>
+        <!-- water pump -->
+        <div class="container">
+            <h4 style="margin-top: 1rem;" class="title-icon"><span class="material-symbols-outlined icon">water_pump</span>WATER PUMP</h3>
+            <h2 id="pump-info" style="font-weight: bold; margin: .2rem;">OFF</h2>
+            <div class="button-container">
+                <button id="pump-on" class="btn-1">Turn On</button>
+                <button id="pump-off" class="btn-2">Turn Off</button>
+            </div>
+        </div>
+    </section>
+    
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="index.js"></script>
+</body>
+</html>
