@@ -1,11 +1,12 @@
 const SERVER_NAME = "localhost";
+const singleton = { wss: null };
 const autoButton = document.getElementById("auto-button");
 const manualButton = document.getElementById("manual-button");
 const serverConnState = document.getElementById("server-conn-status");
 const iotConnState = document.getElementById("iot-conn-status");
 const iotModeDisplay = document.getElementById("iot-mode-state");
 const pumpStateDisplay = document.getElementById("pump-state");
-const pumpSwitch = document.getElementsByClassName("pump-switch");
+const pumpSwitch = document.getElementById("pump-switch");
 const chart1 = document.getElementById("chart1");
 const chart2 = document.getElementById("chart2");
 const chart3 = document.getElementById("chart3");
@@ -41,29 +42,6 @@ const offlineDeviceElement = `
     device is offline
   </span>
 `;
-
-autoButton.addEventListener("click", () => {
-  fetch(`http://${SERVER_NAME}/auto`, {
-    method: "GET",
-    mode: "no-cors",
-  });
-});
-
-manualButton.addEventListener("click", () => {
-  fetch(`http://${SERVER_NAME}/manual`, {
-    method: "GET",
-    mode: "no-cors",
-  });
-});
-
-pumpSwitch.addEventListener("change", () => {
-  fetch(`http://${SERVER_NAME}/off`, {
-    method: "GET",
-    mode: "no-cors",
-  });
-});
-
-const singleton = { wss: null };
 
 function getWebSocketConnection() {
   if (!singleton.wss || singleton.wss.readyState === WebSocket.CLOSED) {
@@ -106,6 +84,22 @@ setInterval(() => {
 }, 500);
 
 getWebSocketConnection();
+
+autoButton.addEventListener("click", () => {
+  singleton.wss && singleton.wss.send("auto");
+});
+
+manualButton.addEventListener("click", () => {
+  singleton.wss && singleton.wss.send("manual");
+});
+
+pumpSwitch.addEventListener("change", function () {
+  if (this.checked) {
+    singleton.wss && singleton.wss.send("pumpOn");
+  } else {
+    singleton.wss && singleton.wss.send("pumpOff");
+  }
+});
 
 const chartOptions = {
   chart: {
