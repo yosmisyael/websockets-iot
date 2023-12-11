@@ -1,0 +1,2 @@
+# Description
+This project is for experimental purposes only. It uses the `WS` library to create a websocket server. It no longer continued because of the lack of authentication features in the frontend application. The developer switched to using `socket.io` to create a stable and secure web socket connection for this project. See the **`main`** branch.
