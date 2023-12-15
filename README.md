@@ -1,0 +1,2 @@
+# Websockets Server for Automatic Watering Systems IoT 
+This websockets server serve a website that displays real-time data from IoT and can be visited on `/`. It also provides a dashboard page on `/dashboard` for users who have logged in. On the dashboard page, users can monitor and interact with connected IoT devices. They can send messages that can be utilized to control IoT devices based on the user interface.
