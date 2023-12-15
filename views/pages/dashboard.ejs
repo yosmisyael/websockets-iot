@@ -1,0 +1,28 @@
+<section class="page-container">
+    <section class="control-wrapper">
+        <!-- device -->
+        <div class="container">
+            <h4 style="margin-top: 1rem;" class="title-icon"><span class="material-symbols-outlined icon">switch_access</span>DEVICE STATUS</h3>
+            <h2 id="iot-mode-state" style="font-weight: bold; margin: .2rem;">OFF</h2>
+        </div>
+        <!-- mode -->
+        <div class="container">
+            <h4 style="margin-top: 1rem;" class="title-icon"><span class="material-symbols-outlined icon">switch_access</span>MODE</h3>
+            <h2 id="iot-mode-state" style="font-weight: bold; margin: .2rem;">AUTO</h2>
+            <div class="button-container">
+                <button id="auto-button" class="btn">Auto</button>
+                <button id="manual-button" class="btn">Manual</button>
+            </div>
+        </div>
+        <!-- water pump -->
+        <div class="container">
+            <h4 style="margin-top: 1rem;" class="title-icon"><span class="material-symbols-outlined icon">water_pump</span>WATER PUMP</h3>
+            <h2 id="pump-state" style="font-weight: bold; margin: .2rem;">OFF</h2>
+            <div class="button-container">
+                <input type="checkbox" id="pump-switch">
+                <label for="pump-switch" class="switch-button"></label>
+            </div>
+        </div>
+    </section>
+</section>
+<script src="/static/control.js"></script>

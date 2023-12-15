@@ -1,0 +1,16 @@
+<div class="form-container">
+    <% if (typeof error !== "undefined" && error) {%>
+        <div class="modal"><%= error %></div>
+    <% } %>
+    <form class="form" action="/login" method="post">
+        <span>
+            <label for="username">username</label>
+            <input type="text" name="username" id="username">
+        </span>
+        <span>
+            <label for="password">password</label>
+            <input type="password" name="password" id="password">
+        </span>
+        <button type="submit" class="btn">login</button>
+    </form>
+</div>

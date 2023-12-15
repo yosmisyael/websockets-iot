@@ -1,0 +1,21 @@
+<header class="header">
+    <a href="/" class="logo">
+        <img src="/static/logo.png" alt="logo" class="img">
+        <span class="logo-title">
+            <span>Soil Moisture Controller</span>
+            <span>SMKN 1 Plosoklaten</span>
+        </span>
+    </a>
+    <% if (title.toLowerCase().includes("login")) {%>
+    <% } else if (typeof token === "undefined" || !token) { %>
+        <a href="/login">
+            <button class="btn">Login</button>
+        </a>
+    <% } else { %>
+        <form action="/logout" method="post">
+            <input type="hidden" name="token" value="<%= token %>">
+            <button type="submit" class="btn">Logout</button>
+        </form>    
+    <% } %>
+
+</header>
